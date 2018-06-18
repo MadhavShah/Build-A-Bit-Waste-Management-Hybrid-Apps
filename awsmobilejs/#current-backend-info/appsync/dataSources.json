@@ -1,0 +1,92 @@
+{
+	"dataSources": [
+		{
+			"dataSourceArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/datasources/AppSyncCommentTable",
+			"name": "AppSyncCommentTable",
+			"description": null,
+			"type": "AMAZON_DYNAMODB",
+			"serviceRoleArn": "arn:aws:iam::070327079168:role/appsync-datasource-ddb-7Ch4wY-AppSyncCommentTable-",
+			"dynamodbConfig": {
+				"tableName": "AppSyncCommentTable-rMqXtlfw",
+				"awsRegion": "us-east-1",
+				"useCallerCredentials": false
+			}
+		},
+		{
+			"dataSourceArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/datasources/AppSyncEventTable",
+			"name": "AppSyncEventTable",
+			"description": null,
+			"type": "AMAZON_DYNAMODB",
+			"serviceRoleArn": "arn:aws:iam::070327079168:role/appsync-datasource-ddb-7Ch4wY-AppSyncEventTable-rM",
+			"dynamodbConfig": {
+				"tableName": "AppSyncEventTable-rMqXtlfw",
+				"awsRegion": "us-east-1",
+				"useCallerCredentials": false
+			}
+		}
+	],
+	"tables": [
+		{
+			"AttributeDefinitions": [
+				{
+					"AttributeName": "commentId",
+					"AttributeType": "S"
+				},
+				{
+					"AttributeName": "eventId",
+					"AttributeType": "S"
+				}
+			],
+			"TableName": "AppSyncCommentTable-rMqXtlfw",
+			"KeySchema": [
+				{
+					"AttributeName": "eventId",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "commentId",
+					"KeyType": "RANGE"
+				}
+			],
+			"TableStatus": "ACTIVE",
+			"CreationDateTime": "2018-06-12T06:48:05.720Z",
+			"ProvisionedThroughput": {
+				"NumberOfDecreasesToday": 0,
+				"ReadCapacityUnits": 5,
+				"WriteCapacityUnits": 5
+			},
+			"TableSizeBytes": 0,
+			"ItemCount": 0,
+			"TableArn": "arn:aws:dynamodb:us-east-1:070327079168:table/AppSyncCommentTable-rMqXtlfw",
+			"TableId": "3251cefe-b1c7-464c-a3aa-1ce7a5417d5d",
+			"Region": "us-east-1"
+		},
+		{
+			"AttributeDefinitions": [
+				{
+					"AttributeName": "id",
+					"AttributeType": "S"
+				}
+			],
+			"TableName": "AppSyncEventTable-rMqXtlfw",
+			"KeySchema": [
+				{
+					"AttributeName": "id",
+					"KeyType": "HASH"
+				}
+			],
+			"TableStatus": "ACTIVE",
+			"CreationDateTime": "2018-06-12T06:50:31.966Z",
+			"ProvisionedThroughput": {
+				"NumberOfDecreasesToday": 0,
+				"ReadCapacityUnits": 5,
+				"WriteCapacityUnits": 5
+			},
+			"TableSizeBytes": 0,
+			"ItemCount": 0,
+			"TableArn": "arn:aws:dynamodb:us-east-1:070327079168:table/AppSyncEventTable-rMqXtlfw",
+			"TableId": "f1fed330-0d1b-44f3-a20a-e74e37e650bd",
+			"Region": "us-east-1"
+		}
+	]
+}

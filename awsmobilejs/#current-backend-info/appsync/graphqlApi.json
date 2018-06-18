@@ -1,0 +1,9 @@
+{
+	"name": "techbinApp",
+	"apiId": "crsgk5hsnnd2lhdigioo7afpqe",
+	"authenticationType": "AWS_IAM",
+	"arn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe",
+	"uris": {
+		"GRAPHQL": "https://t5f227edxjfqxhpmsw4nxezyoy.appsync-api.us-east-1.amazonaws.com/graphql"
+	}
+}

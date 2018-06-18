@@ -1,0 +1,50 @@
+[
+	{
+		"typeName": "Event",
+		"fieldName": "comments",
+		"dataSourceName": "AppSyncCommentTable",
+		"resolverArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/types/Event/resolvers/comments",
+		"requestMappingTemplate": "{managed-by-awsmobile-cli}:Event.comments.request",
+		"responseMappingTemplate": "{managed-by-awsmobile-cli}:Event.comments.response"
+	},
+	{
+		"typeName": "Mutation",
+		"fieldName": "commentOnEvent",
+		"dataSourceName": "AppSyncCommentTable",
+		"resolverArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/types/Mutation/resolvers/commentOnEvent",
+		"requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.commentOnEvent.request",
+		"responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.commentOnEvent.response"
+	},
+	{
+		"typeName": "Mutation",
+		"fieldName": "createEvent",
+		"dataSourceName": "AppSyncEventTable",
+		"resolverArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/types/Mutation/resolvers/createEvent",
+		"requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createEvent.request",
+		"responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createEvent.response"
+	},
+	{
+		"typeName": "Mutation",
+		"fieldName": "deleteEvent",
+		"dataSourceName": "AppSyncEventTable",
+		"resolverArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/types/Mutation/resolvers/deleteEvent",
+		"requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteEvent.request",
+		"responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteEvent.response"
+	},
+	{
+		"typeName": "Query",
+		"fieldName": "getEvent",
+		"dataSourceName": "AppSyncEventTable",
+		"resolverArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/types/Query/resolvers/getEvent",
+		"requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.getEvent.request",
+		"responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.getEvent.response"
+	},
+	{
+		"typeName": "Query",
+		"fieldName": "listEvents",
+		"dataSourceName": "AppSyncEventTable",
+		"resolverArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/types/Query/resolvers/listEvents",
+		"requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.listEvents.request",
+		"responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.listEvents.response"
+	}
+]
