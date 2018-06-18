@@ -13,7 +13,6 @@ export class SettingsPage {
 
   public aboutPage = AboutPage;
   public accountPage = AccountPage;
-
   constructor(public app: App) {
   }
 

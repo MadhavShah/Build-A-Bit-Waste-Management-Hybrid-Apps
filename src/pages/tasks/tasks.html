@@ -1,37 +1,28 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Tasks 
+      Tasks
     </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addTask()">
-        <ion-icon name="add"></ion-icon>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+      <ion-buttons end>
+      <button ion-button (click)="setmarkers()">
+        <ion-icon name="refresh"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>   
   </ion-navbar>
+  
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="refreshData($event)">
-    <ion-refresher-content
-                  pullingIcon="arrow-dropdown"
-                  pullingText="Pull to refresh"
-                  refreshingSpinner="circles"
-                  refreshingText="Refreshing...">
-    </ion-refresher-content>
-  </ion-refresher>
-
-    <ion-list>
-      <ion-item-sliding *ngFor="let item of items; let idx = index;">
-        <button ion-item>
-          <h2>{{item.category}}</h2>
-          <p>{{item.description}}</p>
-        </button>
-
-        <ion-item-options>
-          <button ion-button color="danger" (click)="deleteTask(item, idx)">DELETE</button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
+    <!-- <ion-card> -->
+        <!-- <ion-card-content>
+            <div #directionsPanel></div>
+        </ion-card-content>
+    </ion-card> -->
+ <!-- <div> <p *ngIf="sitems" style="text-align: center">fyfyffvy{{sitems}}</p></div>  -->
+<div #map id="map"></div>
+    
 </ion-content>
 

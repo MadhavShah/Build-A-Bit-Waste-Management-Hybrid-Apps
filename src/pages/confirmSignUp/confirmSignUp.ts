@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 import { Auth, Logger } from 'aws-amplify';
-
 import { LoginPage } from '../login/login';
 
 const logger = new Logger('ConfirmSignUp');
@@ -31,4 +30,5 @@ export class ConfirmSignUpPage {
       .then(() => logger.debug('sent'))
       .catch(err => logger.debug('send code error', err));
   }
+  
 }

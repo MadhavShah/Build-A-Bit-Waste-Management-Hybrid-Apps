@@ -1,0 +1,4 @@
+{
+    "name": "techbinApp",
+    "authenticationType": "AWS_IAM"
+}
