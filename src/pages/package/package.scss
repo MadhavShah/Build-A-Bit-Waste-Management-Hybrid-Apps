@@ -1,0 +1,29 @@
+page-package {
+  .has-refresher > .scroll-content {
+    border-top: 0;
+  }
+  .footer-ios .toolbar-background-ios,
+  .header-ios .toolbar-background-ios {
+    border-color: transparent;
+    background: transparent;
+  }
+  .toolbar-title-ios {
+    color: #6b70ed;
+    letter-spacing: 1px;
+  }
+
+  .label-ios[stacked] {
+      margin-bottom: 0px;
+  }
+  .label-ios {
+    margin: 8px 8px 11px 0;
+  }
+
+.numbered{
+   text-align: center;
+    background: #6b70ed;
+    padding-top: 8px;
+    color:#fff;
+    border-radius: 50%;
+}
+}

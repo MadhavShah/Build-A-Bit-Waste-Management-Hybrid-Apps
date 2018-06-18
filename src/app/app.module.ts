@@ -21,6 +21,8 @@ import { DynamoDB } from '../providers/aws.dynamodb';
 import Amplify from 'aws-amplify';
 import { Camera } from '@ionic-native/camera';
 import { GoogleMapsClusterProvider } from '../providers/google-maps-cluster/google-maps-cluster';
+import { HttpModule } from '@angular/http';
+import 'rxjs/add/operator/map'
 const aws_exports = require('../aws-exports').default;
 
 Amplify.configure(aws_exports);
@@ -39,6 +41,7 @@ Amplify.configure(aws_exports);
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

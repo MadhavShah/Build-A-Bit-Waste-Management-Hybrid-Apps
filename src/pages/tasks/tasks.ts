@@ -1,8 +1,8 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation, Geoposition } from "@ionic-native/geolocation";
-import { NavController, ModalController, Icon, AlertController, ToastController, Item,NavParams } from 'ionic-angular';
-import { Auth, Logger } from 'aws-amplify';
+import { NavController, ModalController, AlertController, ToastController, Item,NavParams } from 'ionic-angular';
+import { Auth, Logger,API } from 'aws-amplify';
 const aws_exports = require('../../aws-exports').default;
 import { DynamoDB } from '../../providers/providers';
 import { Position } from '@angular/compiler';
@@ -10,6 +10,9 @@ import { IconUrl } from 'aws-sdk/clients/mobile';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { LoginPage } from '../login/login';
 import { start } from 'repl';
+import { Http } from '@angular/http';
+//import 'rxjs/add/operator/map';
+//const app= require('../../../awsmobilejs/backend/cloud-api/UserTable/app');
 
 declare var google: any;
 const logger = new Logger('Tasks');
@@ -39,20 +42,38 @@ export class TasksPage {
     public modalCtrl: ModalController,
     public db: DynamoDB,
     public geolocation: Geolocation,
-  public alertCtrl: AlertController,
-  private toastCtrl: ToastController,
-  public navParams: NavParams) {
+    public alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    public navParams: NavParams,
+    public http:Http
+  ) {
      // Auth.currentAuthenticatedUser()
-     this.username = navParams.get('username');
+    this.username = navParams.get('username');
     Auth.currentUserCredentials()
       .then(credentials => {
         this.userId = credentials.identityId;
+        //this.presentToast(this.userId);
       })
       .catch(err => {logger.debug('get current credentials err', err);
     // this.sitems=err;
-    // this.presentToast(this.sitems);
-  
+    this.presentToast(err);
   });
+  let url = "https://x2pmcb3wx3.execute-api.us-east-1.amazonaws.com/Development/User_Data/User_Table";
+    API.post('User_TableCRUD','/User_Table',{
+      "body": 
+            {"userId": "React",
+             "Name": "1",
+              "Email_id": "Learn more Amplify"
+            },
+          })
+      .then(response => {
+      //  this.presentToast("res "+JSON.stringify(response));
+        this.sitems=JSON.stringify(response);
+      })
+      .catch(error => {
+       // console.log(error);
+        this.presentToast("err "+error);
+      });
       
   }
   ionViewDidLoad(){
@@ -62,7 +83,7 @@ export class TasksPage {
   presentToast(data) {
     let toast = this.toastCtrl.create({
       message: data,
-      duration: 9000,
+      duration: 900000,
       position: 'top',
       closeButtonText:'ok'
     });
@@ -109,16 +130,23 @@ export class TasksPage {
 }
   setmarkers()
   {
+    this.http.put('https://x2pmcb3wx3.execute-api.us-east-1.amazonaws.com/Development/User_Data/UserTable', {
+       id: 12,
+      message: 'test'
+    }//, { Authorization: 'OAuth2: token' }
+);
+
+
     var iconBase = 'https://s3.amazonaws.com/techbinapp-hosting-mobilehub-1928256020/icons/';
      var icons = {
       empty: {
-        icon: iconBase + 'greenbinicon.png'
+        icon: iconBase + 'bin1.png'
       },
       active: {
-        icon: iconBase + 'bluebinicon.png'
+        icon: iconBase + 'bin3.png'
       },
       full: {
-        icon: iconBase + 'redbinicon.png'
+        icon: iconBase + 'bin6.png'
       },
       Halt: {
         icon: iconBase + 'redbinicon.png'
@@ -134,7 +162,7 @@ export class TasksPage {
     };
     this.db.getDocumentClient()
       .then(client => (client as DocumentClient).query(param1).promise())
-      .then(data => { this.sitems = JSON.stringify(data.Items);
+      .then(data => { //this.sitems = JSON.stringify(data.Items);
       areaid=data.Items[0].Area_id })
       .catch(err => {logger.debug('error in refresh tasks', err);
     //this.presentToast(err)
@@ -148,7 +176,7 @@ export class TasksPage {
       this.longitude=0;
       this.db.getDocumentClient()
       .then(client => (client as DocumentClient).scan(params).promise())
-      .then(data => { this.sitems= JSON.stringify(data);
+      .then(data => { //this.sitems= JSON.stringify(data);
           for(let item of data.Items)
           {
             this.latitude+=item.Lattitude;
@@ -157,7 +185,7 @@ export class TasksPage {
             //  {continue;}
         var image = {
           url: icons[item.Bin_status].icon,
-          scaledSize: new google.maps.Size(35, 35),
+          scaledSize: new google.maps.Size(50, 50),
         };
       var marker = new google.maps.Marker({
         //animation: google.maps.Animation.BOUNCE,
@@ -194,45 +222,47 @@ export class TasksPage {
         i++;
       
   }
-  putData(Bin_id)
-  {
-    this.sitems="Item Added";
-    const params = {
-      'TableName': this.binTable,
-      'Key':{
-        'Bin_id': Bin_id
-      },
-      UpdateExpression: "set collection_status = :n",
-      ExpressionAttributeValues:{
-          ":n": 'Halt',
-      },
-    };
-    this.db.getDocumentClient()
-      .then(client => (client as DocumentClient).update(params).promise())
-      .then(data => this.sitems=data)
-      .catch(err => this.presentToast(err));
-  }
-  putData2(Bin_id,Bin_status)
-  {
-    this.sitems="Item Added";
-    const params = {
-      'TableName': this.binTable,
-      'Key':{
-        'Bin_id': Bin_id
-      },
-      UpdateExpression: "set Bin_status = :n",
-      ExpressionAttributeValues:{
-          ":n": 'collected',
-      },
-    };
-    if(Bin_status=="empty")
-    {
-    this.db.getDocumentClient()
-      .then(client => (client as DocumentClient).update(params).promise())
-      .then(data => this.sitems=data)
-      .catch(err => this.presentToast(err));
-    }
-  }
+  // putData(Bin_id)
+  // {
+  //   //this.sitems="Item Added";
+  //   const params = {
+  //     'TableName': this.binTable,
+  //     'Key':{
+  //       'Bin_id': Bin_id
+  //     },
+  //     UpdateExpression: "set collection_status = :n",
+  //     ExpressionAttributeValues:{
+  //         ":n": 'Halt',
+  //     },
+  //   };
+  //   this.db.getDocumentClient()
+  //     .then(client => (client as DocumentClient).update(params).promise())
+  //     .then(data => //this.sitems=data
+  //     )
+  //     .catch(err => this.presentToast(err));
+  // }
+  // putData2(Bin_id,Bin_status)
+  // {
+  //   //this.sitems="Item Added";
+  //   const params = {
+  //     'TableName': this.binTable,
+  //     'Key':{
+  //       'Bin_id': Bin_id
+  //     },
+  //     UpdateExpression: "set Bin_status = :n",
+  //     ExpressionAttributeValues:{
+  //         ":n": 'collected',
+  //     },
+  //   };
+  //   if(Bin_status=="empty")
+  //   {
+  //   this.db.getDocumentClient()
+  //     .then(client => (client as DocumentClient).update(params).promise())
+  //     .then(data => //this.sitems=data
+  //     )
+  //     .catch(err => this.presentToast(err));
+  //   }
+  // }
   
   loadMap(){
     
@@ -306,20 +336,22 @@ export class TasksPage {
       document.getElementById('GoC').addEventListener('click', () => {
         //alert('Clicked');
        // this.presentToast("Hello");
-       this.putData(Bin_id);
+      // this.putData(Bin_id);
       });
       document.getElementById('CC').addEventListener('click', () => {
         //alert('Clicked');
        // this.presentToast("Hello");
-       this.putData2(Bin_id,Bin_status);
+      // this.putData2(Bin_id,Bin_status);
       });
     });
    
     google.maps.event.addListener(marker, 'click', () => {
-      //setMapOnAll(null);
+      // setMapOnAll(null);
+      infoWindow.close();
       this.setmarkers();
       infoWindow.open(this.map, marker);
     });
-   
+    setTimeout(function () { infoWindow.close(); }, 5000);
+
   }
 }

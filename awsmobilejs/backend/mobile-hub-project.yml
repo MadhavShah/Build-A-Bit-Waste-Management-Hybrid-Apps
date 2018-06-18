@@ -2,44 +2,56 @@
 features:
   cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
     components:
-      sampleCloudApi: !com.amazonaws.mobilehub.v0.API 
+      UserDataCRUD-MobileHub-199795389: !com.amazonaws.mobilehub.v0.API 
         attributes:
-          name: sampleCloudApi
+          api-arn: 'arn:aws:execute-api:us-east-1:070327079168:x2pmcb3wx3'
+          name: UserDataCRUD-MobileHub-199795389
           requires-signin: false
+          sdk-generation-stage-name: Development
         paths:
-          /items: !com.amazonaws.mobilehub.v0.Function 
-            name: sampleLambda
-            codeFilename: uploads/sampleLambda-20180531014752.zip
-            handler: lambda.handler
-            enableCORS: true
-            runtime: nodejs6.10
-            environment: {}
-          '/items/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            name: sampleLambda
-            codeFilename: uploads/sampleLambda-20180531014752.zip
-            handler: lambda.handler
-            enableCORS: true
-            runtime: nodejs6.10
-            environment: {}
+          /User_Data: !com.amazonaws.mobilehub.v0.Function {}
+          '/User_Data/{proxy+}': !com.amazonaws.mobilehub.v0.Function {}
       User_TableCRUD: !com.amazonaws.mobilehub.v0.API 
         attributes:
           name: User_TableCRUD
           requires-signin: true
+          sdk-generation-stage-name: Development
         paths:
           /User_Table: !com.amazonaws.mobilehub.v0.Function 
-            name: UserTable
-            codeFilename: uploads/UserTable-20180606121641.zip
-            handler: lambda.handler
+            codeFilename: uploads/UserTable-20180618160152.zip
+            description: 'Handler for calls to resource path : /User_Table/{proxy+}'
             enableCORS: true
-            runtime: nodejs6.10
             environment: {}
+            handler: lambda.handler
+            hashcode: 68OB8Ne6l1bZZmB+U4NBlSy6RUcBVDc7GgZ39oyETNc=
+            memorySize: '128'
+            modified: '2018-06-18T10:46:28.057+0000'
+            name: UserTable
+            runtime: nodejs6.10
+            timeout: '3'
+            version: 7AEbphvgbMr2ciNOaBHPznCvA8Xx7iUi
           '/User_Table/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            name: UserTable
-            codeFilename: uploads/UserTable-20180606121641.zip
-            handler: lambda.handler
+            codeFilename: uploads/UserTable-20180618160152.zip
+            description: 'Handler for calls to resource path : /User_Table/{proxy+}'
             enableCORS: true
-            runtime: nodejs6.10
             environment: {}
+            handler: lambda.handler
+            hashcode: 68OB8Ne6l1bZZmB+U4NBlSy6RUcBVDc7GgZ39oyETNc=
+            memorySize: '128'
+            modified: '2018-06-18T10:46:28.057+0000'
+            name: UserTable
+            runtime: nodejs6.10
+            timeout: '3'
+            version: Ld2o0wryviennKB4y9VxVp4nyZ9rM9eM
+      sampleCloudApi-MobileHub-199795389: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          api-arn: 'arn:aws:execute-api:us-east-1:070327079168:oyfuoycrgk'
+          name: sampleCloudApi-MobileHub-199795389
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /items: !com.amazonaws.mobilehub.v0.Function {}
+          '/items/{proxy+}': !com.amazonaws.mobilehub.v0.Function {}
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
       enabled: true
@@ -53,44 +65,47 @@ features:
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
               email: S
+              personId: S
               personName: S
               phone: S
+              teamId: S
             hashKeyName: teamId
             hashKeyType: S
-            rangeKeyName: personId
-            rangeKeyType: S
-            tableName: ___DYNAMIC_PREFIX___-AWSMobileTable
-            tablePrivacy: public
             indexes:
               - !com.amazonaws.mobilehub.v0.NoSQLIndex 
                 hashKeyName: teamId
                 hashKeyType: S
+                indexName: personName-index
                 rangeKeyName: personName
                 rangeKeyType: S
-                indexName: personName-index
+            rangeKeyName: personId
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-AWSMobileTable
+            tablePrivacy: public
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
               Email_id: S
               Mobile_no: N
+              Name: S
               No_of_time_dump: N
               Password: S
               Points: N
               Reward_id: SS
               Total_dump: N
-              Mobileno: N
+              userId: S
             hashKeyName: userId
             hashKeyType: S
-            rangeKeyName: Name
-            rangeKeyType: S
-            tableName: ___DYNAMIC_PREFIX___-User_Table
-            tablePrivacy: private
             indexes:
               - !com.amazonaws.mobilehub.v0.NoSQLIndex 
                 hashKeyName: userId
                 hashKeyType: S
+                indexName: Login
                 rangeKeyName: Email_id
                 rangeKeyType: S
-                indexName: Login
+            rangeKeyName: Name
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-User_Table
+            tablePrivacy: private
   mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
     components:
       analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}

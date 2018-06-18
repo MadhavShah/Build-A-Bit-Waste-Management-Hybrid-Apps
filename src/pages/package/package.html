@@ -1,0 +1,66 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button menuToggle ion-button icon-only style="color:#6b70ed">
+        <ion-icon name="ios-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Buy Stuff</ion-title>
+
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="pollution-back">
+  <div text-center>
+    <img src="assets/imgs/cards.png" style="width:120px;margin-bottom:30px">
+  </div>
+  <ion-card class="round-shadow">
+    <ion-list no-lines radio-group [(ngModel)]="selectedPackage.pack">
+      <ion-item style="border-bottom:2px solid #F4F4F5" *ngFor="let pack of packages;let i = index">
+        <ion-avatar item-start class="numbered">
+          {{i+1}}
+        </ion-avatar>
+
+        <ion-label stacked style="color:#808080;font-size:1.4rem;letter-spacing:0.5px">
+          Price {{pack.price}}INR
+        </ion-label>
+        <ion-label style="min-height:20px">Bonus {{pack.bonus}}INR</ion-label>
+        <ion-radio [value]="pack"></ion-radio>
+      </ion-item>
+      <ion-item style="border-bottom:0px solid #F4F4F5">
+        <ion-avatar item-start class="numbered">
+          {{packages.length+1}}
+        </ion-avatar>
+        <ion-label style="color:#808080;font-size:1.4rem;letter-spacing:0.5px">
+          Customized Package
+        </ion-label>
+        <ion-radio value="custom" item-right></ion-radio>
+      </ion-item>
+      <ion-item *ngIf="selectedPackage.pack=='custom'" style="border-bottom:0px solid #F4F4F5">
+        <ion-avatar item-start>
+        </ion-avatar>
+
+        <ion-input placeholder="Enter amount" type="tel" maxlength="6" min="1" max="10000" [(ngModel)]="selectedPackage.customPrice"></ion-input>
+
+      </ion-item>
+    </ion-list>
+
+  </ion-card>
+  <ion-card class="round-shadow">
+    <ion-list no-lines>
+      <ion-item style="border-bottom:0px solid #F4F4F5">
+        <ion-icon name="ios-pricetag-outline" item-left color="primary"></ion-icon>
+
+        <ion-label stacked style="color:#808080;font-size:1.4rem;letter-spacing:0.5px">Promocode</ion-label>
+        <ion-input type="text" maxlength="8" [(ngModel)]="selectedPackage.promo"></ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
+<ion-footer >
+  <div style="padding:12px" >
+    <button class="boldbutton" [disabled]="!checkEnabled()" ion-button block (click)="payment()" style="font-weight:700;letter-spacing:1px">Next</button>
+  </div>
+</ion-footer>

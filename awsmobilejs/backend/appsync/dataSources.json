@@ -31,10 +31,6 @@
                     "AttributeType": "S"
                 },
                 {
-                    "AttributeName": "createdAt",
-                    "AttributeType": "S"
-                },
-                {
                     "AttributeName": "eventId",
                     "AttributeType": "S"
                 }
@@ -54,24 +50,6 @@
                 "ReadCapacityUnits": 5,
                 "WriteCapacityUnits": 5
             },
-            "LocalSecondaryIndexes": [
-                {
-                    "IndexName": "LSI-AppSyncCommentTable-by-eventId-createdAt",
-                    "KeySchema": [
-                        {
-                            "AttributeName": "eventId",
-                            "KeyType": "HASH"
-                        },
-                        {
-                            "AttributeName": "createdAt",
-                            "KeyType": "RANGE"
-                        }
-                    ],
-                    "Projection": {
-                        "ProjectionType": "ALL"
-                    }
-                }
-            ],
             "Region": "us-east-1"
         },
         {
