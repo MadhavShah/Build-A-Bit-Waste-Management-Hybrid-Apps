@@ -6,14 +6,14 @@
 	"LastNPMInstallTime": "",
 	"FrontendLastBuildTime": "",
 	"LastPublishTime": "",
-	"BackendLastSyncTime": "2018-06-18-16-27-44",
-	"BackendLastBuildTime": "2018-06-18-16-16-08",
-	"BackendLastPushTime": "2018-06-18-16-17-23",
+	"BackendLastSyncTime": "2018-07-07-01-35-14",
+	"BackendLastBuildTime": "2018-07-07-01-31-07",
+	"BackendLastPushTime": "2018-07-07-01-32-36",
 	"BackendProjectID": "0542e00d-87bc-47ff-a6cd-0db1bd88e717",
 	"BackendProjectName": "techbinApp",
 	"BackendProjectConsoleUrl": "https://console.aws.amazon.com/mobilehub/home#/0542e00d-87bc-47ff-a6cd-0db1bd88e717/build",
 	"BackendProjectCreationTime": "2018-05-26T15:45:24.112Z",
-	"BackendProjectLastUpdatedTime": "2018-06-18T10:46:16.118Z",
+	"BackendProjectLastUpdatedTime": "2018-07-06T20:01:42.760Z",
 	"Framework": "ionic",
-	"BackendLastSyncToDevTime": "2018-06-18-16-28-10"
+	"BackendLastSyncToDevTime": "2018-07-07-01-39-51"
 }

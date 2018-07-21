@@ -2,15 +2,6 @@
 features:
   cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
     components:
-      UserDataCRUD-MobileHub-199795389: !com.amazonaws.mobilehub.v0.API 
-        attributes:
-          api-arn: 'arn:aws:execute-api:us-east-1:070327079168:x2pmcb3wx3'
-          name: UserDataCRUD-MobileHub-199795389
-          requires-signin: false
-          sdk-generation-stage-name: Development
-        paths:
-          /User_Data: !com.amazonaws.mobilehub.v0.Function {}
-          '/User_Data/{proxy+}': !com.amazonaws.mobilehub.v0.Function {}
       User_TableCRUD: !com.amazonaws.mobilehub.v0.API 
         attributes:
           name: User_TableCRUD
@@ -18,40 +9,31 @@ features:
           sdk-generation-stage-name: Development
         paths:
           /User_Table: !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/UserTable-20180618160152.zip
+            codeFilename: uploads/UserTable-20180707013002.zip
             description: 'Handler for calls to resource path : /User_Table/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: 68OB8Ne6l1bZZmB+U4NBlSy6RUcBVDc7GgZ39oyETNc=
+            hashcode: cR6eQkQI3QZaniLQ3WAxS5J3OS+yJUp93QYR43RlEWQ=
             memorySize: '128'
-            modified: '2018-06-18T10:46:28.057+0000'
+            modified: '2018-07-06T20:01:55.400+0000'
             name: UserTable
             runtime: nodejs6.10
             timeout: '3'
-            version: 7AEbphvgbMr2ciNOaBHPznCvA8Xx7iUi
+            version: WJy1jdTeknW.BWI7S_gh9Tv4yZIMqIXa
           '/User_Table/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
-            codeFilename: uploads/UserTable-20180618160152.zip
+            codeFilename: uploads/UserTable-20180707013002.zip
             description: 'Handler for calls to resource path : /User_Table/{proxy+}'
             enableCORS: true
             environment: {}
             handler: lambda.handler
-            hashcode: 68OB8Ne6l1bZZmB+U4NBlSy6RUcBVDc7GgZ39oyETNc=
+            hashcode: cR6eQkQI3QZaniLQ3WAxS5J3OS+yJUp93QYR43RlEWQ=
             memorySize: '128'
-            modified: '2018-06-18T10:46:28.057+0000'
+            modified: '2018-07-06T20:01:55.400+0000'
             name: UserTable
             runtime: nodejs6.10
             timeout: '3'
-            version: Ld2o0wryviennKB4y9VxVp4nyZ9rM9eM
-      sampleCloudApi-MobileHub-199795389: !com.amazonaws.mobilehub.v0.API 
-        attributes:
-          api-arn: 'arn:aws:execute-api:us-east-1:070327079168:oyfuoycrgk'
-          name: sampleCloudApi-MobileHub-199795389
-          requires-signin: false
-          sdk-generation-stage-name: Development
-        paths:
-          /items: !com.amazonaws.mobilehub.v0.Function {}
-          '/items/{proxy+}': !com.amazonaws.mobilehub.v0.Function {}
+            version: MmYsdAL857y4bSUrU.ew9qVfhIsIvMIu
   content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
     attributes:
       enabled: true
@@ -62,26 +44,6 @@ features:
     components:
       database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
         tables:
-          - !com.amazonaws.mobilehub.v0.NoSQLTable 
-            attributes:
-              email: S
-              personId: S
-              personName: S
-              phone: S
-              teamId: S
-            hashKeyName: teamId
-            hashKeyType: S
-            indexes:
-              - !com.amazonaws.mobilehub.v0.NoSQLIndex 
-                hashKeyName: teamId
-                hashKeyType: S
-                indexName: personName-index
-                rangeKeyName: personName
-                rangeKeyType: S
-            rangeKeyName: personId
-            rangeKeyType: S
-            tableName: ___DYNAMIC_PREFIX___-AWSMobileTable
-            tablePrivacy: public
           - !com.amazonaws.mobilehub.v0.NoSQLTable 
             attributes:
               Email_id: S
@@ -119,7 +81,7 @@ features:
           alias-attributes:
             - email
             - phone_number
-          mfa-configuration: ON
+          mfa-configuration: OFF
           name: userpool
           password-policy: !com.amazonaws.mobilehub.ConvertibleMap 
             min-length: '8'

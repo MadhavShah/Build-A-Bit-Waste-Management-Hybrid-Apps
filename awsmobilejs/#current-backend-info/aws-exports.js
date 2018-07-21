@@ -8,7 +8,7 @@
 const awsmobile = {
     'aws_app_analytics': 'enable',
     'aws_cloud_logic': 'enable',
-    'aws_cloud_logic_custom': [{"id":"x2pmcb3wx3","name":"UserDataCRUD-MobileHub-199795389","description":"","endpoint":"https://x2pmcb3wx3.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/User_Data","/User_Data/123"]},{"id":"ilni5jx9e1","name":"User_TableCRUD","description":"","endpoint":"https://ilni5jx9e1.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/User_Table","/User_Table/123"]},{"id":"oyfuoycrgk","name":"sampleCloudApi-MobileHub-199795389","description":"","endpoint":"https://oyfuoycrgk.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/items","/items/123"]}],
+    'aws_cloud_logic_custom': [{"id":"ilni5jx9e1","name":"User_TableCRUD","description":"","endpoint":"https://ilni5jx9e1.execute-api.us-east-1.amazonaws.com/Development","region":"us-east-1","paths":["/User_Table","/User_Table/123"]}],
     'aws_cognito_identity_pool_id': 'us-east-1:e850c18c-4fea-4662-a11f-d713ca545e2c',
     'aws_cognito_region': 'us-east-1',
     'aws_content_delivery': 'enable',
@@ -18,7 +18,7 @@ const awsmobile = {
     'aws_content_delivery_cloudfront_domain': 'd3hkoua7ya2hv1.cloudfront.net',
     'aws_dynamodb': 'enable',
     'aws_dynamodb_all_tables_region': 'us-east-1',
-    'aws_dynamodb_table_schemas': [{"tableName":"techbinapp-mobilehub-1928256020-AWSMobileTable","attributes":[{"name":"teamId","type":"S"},{"name":"personId","type":"S"},{"name":"email","type":"S"},{"name":"personName","type":"S"},{"name":"phone","type":"S"}],"indexes":[{"indexName":"personName-index","hashKey":"teamId","rangeKey":"personName"}],"region":"us-east-1","hashKey":"teamId","rangeKey":"personId"},{"tableName":"techbinapp-mobilehub-1928256020-User_Table","attributes":[{"name":"userId","type":"S"},{"name":"Name","type":"S"},{"name":"Email_id","type":"S"},{"name":"Mobile_no","type":"N"},{"name":"No_of_time_dump","type":"N"},{"name":"Password","type":"S"},{"name":"Points","type":"N"},{"name":"Reward_id","type":"SS"},{"name":"Total_dump","type":"N"}],"indexes":[{"indexName":"Login","hashKey":"userId","rangeKey":"Email_id"}],"region":"us-east-1","hashKey":"userId","rangeKey":"Name"}],
+    'aws_dynamodb_table_schemas': [{"tableName":"techbinapp-mobilehub-1928256020-User_Table","attributes":[{"name":"userId","type":"S"},{"name":"Name","type":"S"},{"name":"Email_id","type":"S"},{"name":"Mobile_no","type":"N"},{"name":"No_of_time_dump","type":"N"},{"name":"Password","type":"S"},{"name":"Points","type":"N"},{"name":"Reward_id","type":"SS"},{"name":"Total_dump","type":"N"}],"indexes":[{"indexName":"Login","hashKey":"userId","rangeKey":"Email_id"}],"region":"us-east-1","hashKey":"userId","rangeKey":"Name"}],
     'aws_mobile_analytics_app_id': '488ab5ab6ab747e4ba13116495400e02',
     'aws_mobile_analytics_app_region': 'us-east-1',
     'aws_project_id': '0542e00d-87bc-47ff-a6cd-0db1bd88e717',
@@ -36,7 +36,7 @@ const awsmobile = {
     'aws_user_pools_web_client_id': '482v7mkk12kkqcser3m6pn08ba',
     'aws_appsync_graphqlEndpoint': 'https://t5f227edxjfqxhpmsw4nxezyoy.appsync-api.us-east-1.amazonaws.com/graphql',
     'aws_appsync_region': 'us-east-1',
-    'aws_appsync_authenticationType': 'AWS_IAM',
+    'aws_appsync_authenticationType': 'AMAZON_COGNITO_USER_POOLS',
 }
 
 export default awsmobile;

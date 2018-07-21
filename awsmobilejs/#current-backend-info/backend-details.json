@@ -4,7 +4,7 @@
 	"region": "us-east-1",
 	"state": "NORMAL",
 	"createdDate": "2018-05-26T15:45:24.112Z",
-	"lastUpdatedDate": "2018-06-18T10:46:16.118Z",
+	"lastUpdatedDate": "2018-07-06T20:01:42.760Z",
 	"consoleUrl": "https://console.aws.amazon.com/mobilehub/home#/0542e00d-87bc-47ff-a6cd-0db1bd88e717/build",
 	"resources": [
 		{
@@ -25,7 +25,7 @@
 			"feature": "user-data",
 			"attributes": {
 				"authType": "authenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_auth_MOBILEHUB_1928256020"
 			}
 		},
@@ -36,7 +36,7 @@
 			"feature": "user-data",
 			"attributes": {
 				"authType": "unauthenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_unauth_MOBILEHUB_1928256020"
 			}
 		},
@@ -47,7 +47,7 @@
 			"feature": "database",
 			"attributes": {
 				"authType": "authenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_auth_MOBILEHUB_1928256020"
 			}
 		},
@@ -58,17 +58,8 @@
 			"feature": "database",
 			"attributes": {
 				"authType": "unauthenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_unauth_MOBILEHUB_1928256020"
-			}
-		},
-		{
-			"type": "AWS::DynamoDB::Table",
-			"name": "techbinapp-mobilehub-1928256020-AWSMobileTable",
-			"arn": "arn:aws:dynamodb:us-east-1:070327079168:table/techbinapp-mobilehub-1928256020-AWSMobileTable",
-			"feature": "database",
-			"attributes": {
-				"lastUpdateRequestID": "8f061967-2b3d-4d3f-8ebd-adaf368c6ac3"
 			}
 		},
 		{
@@ -86,7 +77,7 @@
 			"arn": "us-east-1:e850c18c-4fea-4662-a11f-d713ca545e2c",
 			"feature": "user-signin",
 			"attributes": {
-				"lastUpdateRequestID": "8f061967-2b3d-4d3f-8ebd-adaf368c6ac3",
+				"lastUpdateRequestID": "1b748b75-5d31-4c86-8d2d-85518210fb24",
 				"poolid": "us-east-1:e850c18c-4fea-4662-a11f-d713ca545e2c",
 				"roleARNs": "arn:aws:iam::070327079168:role/techbinapp_auth_MOBILEHUB_1928256020,arn:aws:iam::070327079168:role/techbinapp_unauth_MOBILEHUB_1928256020"
 			}
@@ -125,7 +116,7 @@
 			"feature": "user-signin",
 			"attributes": {
 				"authType": "authenticated",
-				"lastUpdateRequestID": "8f061967-2b3d-4d3f-8ebd-adaf368c6ac3"
+				"lastUpdateRequestID": "96d7c98f-ce05-4f54-a94a-59008c436b0f"
 			}
 		},
 		{
@@ -135,7 +126,7 @@
 			"feature": "user-signin",
 			"attributes": {
 				"authType": "unauthenticated",
-				"lastUpdateRequestID": "754e5647-dbce-4365-8f46-b6524fd16a54"
+				"lastUpdateRequestID": "1b748b75-5d31-4c86-8d2d-85518210fb24"
 			}
 		},
 		{
@@ -154,7 +145,7 @@
 			"feature": "analytics",
 			"attributes": {
 				"authType": "authenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_auth_MOBILEHUB_1928256020"
 			}
 		},
@@ -165,7 +156,7 @@
 			"feature": "analytics",
 			"attributes": {
 				"authType": "unauthenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_unauth_MOBILEHUB_1928256020"
 			}
 		},
@@ -198,7 +189,7 @@
 			"feature": "hosting",
 			"attributes": {
 				"authType": "authenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_auth_MOBILEHUB_1928256020"
 			}
 		},
@@ -209,7 +200,7 @@
 			"feature": "hosting",
 			"attributes": {
 				"authType": "unauthenticated",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
 				"role": "techbinapp_unauth_MOBILEHUB_1928256020"
 			}
 		},
@@ -219,50 +210,20 @@
 			"arn": null,
 			"feature": "cloud-api",
 			"attributes": {
-				"eTag": "29e8a648ae0a6b249192f513dfacad88",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
-				"versionID": "QLAjg94rNOg96vDtebS5bVymGPNZ65Tv"
+				"eTag": "52f93c1044213969c9fce5589cc5950d",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
+				"versionID": "7uOv3WptBt4yt5bPkTd69wftwjOrMvOQ"
 			}
 		},
 		{
 			"type": "AWS::S3::File",
-			"name": "uploads/UserTable-20180618160152.zip",
+			"name": "uploads/UserTable-20180707013002.zip",
 			"arn": null,
 			"feature": "cloud-api",
 			"attributes": {
-				"eTag": "a86ba49a8d2ff278544ef1c8388a2d0e-3",
-				"lastUpdateRequestID": "3542c4a2-8d7c-40b7-b526-fdd85571786d",
-				"versionID": "Ld2o0wryviennKB4y9VxVp4nyZ9rM9eM"
-			}
-		},
-		{
-			"type": "AWS::ApiGateway::RestApi",
-			"name": "UserDataCRUD-MobileHub-199795389",
-			"arn": "arn:aws:execute-api:us-east-1:070327079168:x2pmcb3wx3",
-			"feature": "cloud-api",
-			"attributes": {
-				"cfLogicalID": "UserDataCRUDMobileHub199795389",
-				"cfPhysicalID": "x2pmcb3wx3",
-				"configApiName": "UserDataCRUD-MobileHub-199795389",
-				"deeplinkURL": "https://console.aws.amazon.com/apigateway/home?region=us-east-1#/apis/x2pmcb3wx3/resources",
-				"existing": "true",
-				"region": "us-east-1",
-				"stages": "Development,MobileHub_Deployments"
-			}
-		},
-		{
-			"type": "AWS::ApiGateway::RestApi",
-			"name": "sampleCloudApi-MobileHub-199795389",
-			"arn": "arn:aws:execute-api:us-east-1:070327079168:oyfuoycrgk",
-			"feature": "cloud-api",
-			"attributes": {
-				"cfLogicalID": "sampleCloudApiMobileHub199795389",
-				"cfPhysicalID": "oyfuoycrgk",
-				"configApiName": "sampleCloudApi-MobileHub-199795389",
-				"deeplinkURL": "https://console.aws.amazon.com/apigateway/home?region=us-east-1#/apis/oyfuoycrgk/resources",
-				"existing": "true",
-				"region": "us-east-1",
-				"stages": "Development,MobileHub_Deployments"
+				"eTag": "08f17c5ee30f184a74b2e9295050f23c-3",
+				"lastUpdateRequestID": "fe9b364d-9f84-482e-af1f-f0ecdddf3b2c",
+				"versionID": "MmYsdAL857y4bSUrU.ew9qVfhIsIvMIu"
 			}
 		},
 		{
@@ -280,20 +241,6 @@
 			}
 		},
 		{
-			"type": "AWS::ApiGateway::Deployment",
-			"name": "UserTableCRUD-Development29e8a648ae0a6b24-MobileHub-1928256020",
-			"arn": null,
-			"feature": "cloud-api",
-			"attributes": {
-				"cfLogicalID": "UserTableCRUDDevelopment29e8a648ae0a6b24MobileHub1928256020",
-				"cfPhysicalID": "ytb104",
-				"lastUpdateTimestamp": "1529318788402",
-				"reason": "none",
-				"region": "us-east-1",
-				"status": "CREATE_COMPLETE"
-			}
-		},
-		{
 			"type": "AWS::Lambda::Function",
 			"name": "UserTableCRUD-UserTable-mobilehub-1928256020",
 			"arn": null,
@@ -304,7 +251,21 @@
 				"configApiName": "User_TableCRUD",
 				"configHandlerName": "UserTable",
 				"deeplinkURL": "https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions/UserTableCRUD-UserTable-mobilehub-1928256020",
-				"lastUpdateTimestamp": "1529318789112",
+				"lastUpdateTimestamp": "1530907315976",
+				"reason": "none",
+				"region": "us-east-1",
+				"status": "UPDATE_COMPLETE"
+			}
+		},
+		{
+			"type": "AWS::ApiGateway::Deployment",
+			"name": "UserTableCRUD-Development52f93c1044213969-MobileHub-1928256020",
+			"arn": null,
+			"feature": "cloud-api",
+			"attributes": {
+				"cfLogicalID": "UserTableCRUDDevelopment52f93c1044213969MobileHub1928256020",
+				"cfPhysicalID": "ddzu7j",
+				"lastUpdateTimestamp": "1530907315114",
 				"reason": "none",
 				"region": "us-east-1",
 				"status": "CREATE_COMPLETE"
@@ -334,7 +295,7 @@
 				"cfLogicalID": "CloudLogic",
 				"cfPhysicalID": "arn:aws:cloudformation:us-east-1:070327079168:stack/MOBILEHUB-1928256020-Development-CloudLogic-4SK12HWYSL3/4dedb730-6e25-11e8-bc49-500c28903236",
 				"deeplinkURL": "https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stack/detail?stackId=arn:aws:cloudformation:us-east-1:070327079168:stack/MOBILEHUB-1928256020-Development-CloudLogic-4SK12HWYSL3/4dedb730-6e25-11e8-bc49-500c28903236",
-				"lastUpdateTimestamp": "1529318829615",
+				"lastUpdateTimestamp": "1530907343394",
 				"reason": "none",
 				"region": "us-east-1",
 				"status": "UPDATE_COMPLETE"
@@ -364,10 +325,10 @@
 				"cfPhysicalID": "ilni5jx9e1",
 				"configApiName": "User_TableCRUD",
 				"deeplinkURL": "https://console.aws.amazon.com/apigateway/home?region=us-east-1#/apis/ilni5jx9e1/resources",
-				"lastUpdateTimestamp": "1529318785101",
+				"lastUpdateTimestamp": "1530907312015",
 				"reason": "none",
 				"region": "us-east-1",
-				"status": "CREATE_COMPLETE"
+				"status": "UPDATE_COMPLETE"
 			}
 		},
 		{
@@ -380,20 +341,6 @@
 				"cfPhysicalID": "arn:aws:lambda:us-east-1:070327079168:function:UserTableCRUD-UserTable-mobilehub-1928256020:Development",
 				"deeplinkURL": "https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions/UserTableCRUD-UserTable-mobilehub-1928256020/Development",
 				"lastUpdateTimestamp": "1529318791729",
-				"reason": "none",
-				"region": "us-east-1",
-				"status": "CREATE_COMPLETE"
-			}
-		},
-		{
-			"type": "AWS::IAM::Policy",
-			"name": "MOBIL-Poli-ZFO26IBY6W6J",
-			"arn": null,
-			"feature": "cloud-api",
-			"attributes": {
-				"cfLogicalID": "PolicyUserDataCRUDMobileHub199795389",
-				"cfPhysicalID": "MOBIL-Poli-ZFO26IBY6W6J",
-				"lastUpdateTimestamp": "1528796722818",
 				"reason": "none",
 				"region": "us-east-1",
 				"status": "CREATE_COMPLETE"
@@ -414,20 +361,6 @@
 			}
 		},
 		{
-			"type": "AWS::IAM::Policy",
-			"name": "MOBIL-Poli-ENGJ1NA4WEUC",
-			"arn": null,
-			"feature": "cloud-api",
-			"attributes": {
-				"cfLogicalID": "PolicysampleCloudApiMobileHub199795389",
-				"cfPhysicalID": "MOBIL-Poli-ENGJ1NA4WEUC",
-				"lastUpdateTimestamp": "1528796724760",
-				"reason": "none",
-				"region": "us-east-1",
-				"status": "CREATE_COMPLETE"
-			}
-		},
-		{
 			"type": "AWS::ApiGateway::Stage",
 			"name": "UserTableCRUD-Development-MobileHub-1928256020",
 			"arn": null,
@@ -435,10 +368,10 @@
 			"attributes": {
 				"cfLogicalID": "UserTableCRUDDevelopmentMobileHub1928256020",
 				"cfPhysicalID": "Development",
-				"lastUpdateTimestamp": "1529318792411",
+				"lastUpdateTimestamp": "1530907318500",
 				"reason": "none",
 				"region": "us-east-1",
-				"status": "CREATE_COMPLETE"
+				"status": "UPDATE_COMPLETE"
 			}
 		},
 		{

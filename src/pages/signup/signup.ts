@@ -5,8 +5,6 @@ import { Auth, Logger } from 'aws-amplify';
 
 import { LoginPage } from '../login/login';
 import { ConfirmSignUpPage } from '../confirmSignUp/confirmSignUp';
-import { AuthenticationDetails } from 'amazon-cognito-identity-js';
-import { NgModel } from '@angular/forms';
 
 const logger = new Logger('SignUp');
 
@@ -54,47 +52,5 @@ export class SignupPage {
 
   login() {
     this.navCtrl.push(LoginPage);
-  }/*
-  showPrompt() {
-    let prompt = this.alertCtrl.create({
-      title: 'OTP Verification',
-      message: "Enter OTP sent to your mobile no. to verify your account",
-      inputs: [
-        { 
-          name: 'code',
-          placeholder: 'Enter OTP',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Resend OTP',
-          handler: data => {
-            this.resendCode();
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Done',
-          handler: data => {
-            this.confirmSignUp(data);
-            console.log('Saved clicked');
-          }
-        }
-      ]
-    });
-    prompt.present();
   }
-  resendCode() {
-    Auth.resendSignUp(this.userDetails.username)
-      .then(() => logger.debug('sent'))
-      .catch(err => logger.debug('send code error', err));
-      this.showPrompt();
-  }
-  confirmSignUp(data) {
-    Auth.confirmSignUp(this.userDetails.username, data)
-      .then(() => this.navCtrl.push(LoginPage))
-      .catch(err => logger.debug('confirm error', err));
-     
-  }
-*/
 }

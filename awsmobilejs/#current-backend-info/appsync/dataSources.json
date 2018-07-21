@@ -1,27 +1,25 @@
 {
 	"dataSources": [
 		{
-			"dataSourceArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/datasources/AppSyncCommentTable",
-			"name": "AppSyncCommentTable",
-			"description": null,
+			"dataSourceArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/datasources/Bin_Data",
+			"name": "Bin_Data",
+			"description": "Data source created by the console.",
 			"type": "AMAZON_DYNAMODB",
-			"serviceRoleArn": "arn:aws:iam::070327079168:role/appsync-datasource-ddb-7Ch4wY-AppSyncCommentTable-",
+			"serviceRoleArn": "arn:aws:iam::070327079168:role/service-role/appsync-datasource-ddb-crsgk5-Bin_Data",
 			"dynamodbConfig": {
-				"tableName": "AppSyncCommentTable-rMqXtlfw",
+				"tableName": "Bin_Data",
 				"awsRegion": "us-east-1",
 				"useCallerCredentials": false
 			}
 		},
 		{
-			"dataSourceArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/datasources/AppSyncEventTable",
-			"name": "AppSyncEventTable",
-			"description": null,
-			"type": "AMAZON_DYNAMODB",
-			"serviceRoleArn": "arn:aws:iam::070327079168:role/appsync-datasource-ddb-7Ch4wY-AppSyncEventTable-rM",
-			"dynamodbConfig": {
-				"tableName": "AppSyncEventTable-rMqXtlfw",
-				"awsRegion": "us-east-1",
-				"useCallerCredentials": false
+			"dataSourceArn": "arn:aws:appsync:us-east-1:070327079168:apis/crsgk5hsnnd2lhdigioo7afpqe/datasources/lambda",
+			"name": "lambda",
+			"description": "Data source created by the console.",
+			"type": "AWS_LAMBDA",
+			"serviceRoleArn": "arn:aws:iam::070327079168:role/service-role/appsync-datasource-lam-crsgk5-binToDynamodb",
+			"lambdaConfig": {
+				"lambdaFunctionArn": "arn:aws:lambda:us-east-1:070327079168:function:binToDynamodb"
 			}
 		}
 	],
@@ -29,63 +27,34 @@
 		{
 			"AttributeDefinitions": [
 				{
-					"AttributeName": "commentId",
-					"AttributeType": "S"
-				},
-				{
-					"AttributeName": "eventId",
+					"AttributeName": "Bin_id",
 					"AttributeType": "S"
 				}
 			],
-			"TableName": "AppSyncCommentTable-rMqXtlfw",
+			"TableName": "Bin_Data",
 			"KeySchema": [
 				{
-					"AttributeName": "eventId",
+					"AttributeName": "Bin_id",
 					"KeyType": "HASH"
-				},
-				{
-					"AttributeName": "commentId",
-					"KeyType": "RANGE"
 				}
 			],
 			"TableStatus": "ACTIVE",
-			"CreationDateTime": "2018-06-12T06:48:05.720Z",
+			"CreationDateTime": "2018-06-04T08:17:36.849Z",
 			"ProvisionedThroughput": {
 				"NumberOfDecreasesToday": 0,
 				"ReadCapacityUnits": 5,
 				"WriteCapacityUnits": 5
 			},
-			"TableSizeBytes": 0,
-			"ItemCount": 0,
-			"TableArn": "arn:aws:dynamodb:us-east-1:070327079168:table/AppSyncCommentTable-rMqXtlfw",
-			"TableId": "3251cefe-b1c7-464c-a3aa-1ce7a5417d5d",
-			"Region": "us-east-1"
-		},
-		{
-			"AttributeDefinitions": [
-				{
-					"AttributeName": "id",
-					"AttributeType": "S"
-				}
-			],
-			"TableName": "AppSyncEventTable-rMqXtlfw",
-			"KeySchema": [
-				{
-					"AttributeName": "id",
-					"KeyType": "HASH"
-				}
-			],
-			"TableStatus": "ACTIVE",
-			"CreationDateTime": "2018-06-12T06:50:31.966Z",
-			"ProvisionedThroughput": {
-				"NumberOfDecreasesToday": 0,
-				"ReadCapacityUnits": 5,
-				"WriteCapacityUnits": 5
+			"TableSizeBytes": 461,
+			"ItemCount": 2,
+			"TableArn": "arn:aws:dynamodb:us-east-1:070327079168:table/Bin_Data",
+			"TableId": "4b35234a-cf4c-48b7-9cf1-cd47f21d95d2",
+			"StreamSpecification": {
+				"StreamEnabled": true,
+				"StreamViewType": "NEW_AND_OLD_IMAGES"
 			},
-			"TableSizeBytes": 0,
-			"ItemCount": 0,
-			"TableArn": "arn:aws:dynamodb:us-east-1:070327079168:table/AppSyncEventTable-rMqXtlfw",
-			"TableId": "f1fed330-0d1b-44f3-a20a-e74e37e650bd",
+			"LatestStreamLabel": "2018-06-04T11:56:05.866",
+			"LatestStreamArn": "arn:aws:dynamodb:us-east-1:070327079168:table/Bin_Data/stream/2018-06-04T11:56:05.866",
 			"Region": "us-east-1"
 		}
 	]

@@ -16,7 +16,7 @@ import { AboutPage } from '../pages/about/about';
 export class MyApp {
   @ViewChild(Nav) nav:Nav;
   pages: { title: string; component: any; }[];
-  rootPage:any = TasksPage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     let globalActions = function() {
@@ -31,7 +31,7 @@ export class MyApp {
       { title: 'Settings', component: SettingsPage },
       { title: 'About', component: AboutPage }
     ];
-
+    
     platform.ready()
       .then(() => {
         Auth.currentAuthenticatedUser()

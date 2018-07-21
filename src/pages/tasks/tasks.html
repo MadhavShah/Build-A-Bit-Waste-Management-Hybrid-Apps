@@ -7,7 +7,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
       <ion-buttons end>
-      <button ion-button (click)="setmarkers()">
+      <button ion-button (click)="addmarkers()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>   
@@ -15,13 +15,7 @@
   
 </ion-header>
 
-<ion-content>
-    <!-- <ion-card> -->
-        <!-- <ion-card-content>
-            <div #directionsPanel></div>
-        </ion-card-content>
-    </ion-card> -->
-  <div> <p *ngIf="sitems" style="text-align: center">fyfyffvy{{sitems}}</p></div>  
+<ion-content>  
 <div #map id="map"></div>
     
 </ion-content>

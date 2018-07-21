@@ -1,18 +1,12 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation, Geoposition } from "@ionic-native/geolocation";
-import { NavController, ModalController, AlertController, ToastController, Item,NavParams } from 'ionic-angular';
-import { Auth, Logger,API } from 'aws-amplify';
-const aws_exports = require('../../aws-exports').default;
+import { NavController, ModalController, AlertController, ToastController, Item,NavParams, LoadingController } from 'ionic-angular';
+import { Auth, Logger,API,graphqlOperation } from 'aws-amplify';
+const aws_exports = require('../../aws-exports');
 import { DynamoDB } from '../../providers/providers';
-import { Position } from '@angular/compiler';
-import { IconUrl } from 'aws-sdk/clients/mobile';
-import { variable } from '@angular/compiler/src/output/output_ast';
-import { LoginPage } from '../login/login';
-import { start } from 'repl';
 import { Http } from '@angular/http';
-//import 'rxjs/add/operator/map';
-//const app= require('../../../awsmobilejs/backend/cloud-api/UserTable/app');
+import { setTimeout } from 'timers';
 
 declare var google: any;
 const logger = new Logger('Tasks');
@@ -28,9 +22,10 @@ export class TasksPage {
   @ViewChild('directionsPanel') directionsPanel: ElementRef;
   map: any;
   position: Geoposition;
+  markers: any[];
   public items: any;
   public sitems: any;
-  public jitems: JSON;
+  public binData: any;
   public binFull: number;
   public username: string;
   public refresher: any;
@@ -45,45 +40,420 @@ export class TasksPage {
     public alertCtrl: AlertController,
     private toastCtrl: ToastController,
     public navParams: NavParams,
-    public http:Http
+    public http:Http,
+    private loadingCtrl: LoadingController
   ) {
-     // Auth.currentAuthenticatedUser()
-    this.username = navParams.get('username');
-    Auth.currentUserCredentials()
-      .then(credentials => {
-        this.userId = credentials.identityId;
-        //this.presentToast(this.userId);
-      })
-      .catch(err => {logger.debug('get current credentials err', err);
-    // this.sitems=err;
-    this.presentToast(err);
-  });
-  let url = "https://x2pmcb3wx3.execute-api.us-east-1.amazonaws.com/Development/User_Data/User_Table";
-    API.post('User_TableCRUD','/User_Table',{
-      "body": 
-            {"userId": "React",
-             "Name": "1",
-              "Email_id": "Learn more Amplify"
-            },
-          })
-      .then(response => {
-      //  this.presentToast("res "+JSON.stringify(response));
-        this.sitems=JSON.stringify(response);
-      })
-      .catch(error => {
-       // console.log(error);
-        this.presentToast("err "+error);
-      });
-      
+      this.username = navParams.get('username');
+      this.markers=[];
+      this.latitude=0;
+      this.longitude=0;
   }
-  ionViewDidLoad(){
+
+  
+  async ionViewDidLoad(){
+    this.binData=await this.listBinData();
+    this.addmarkers();
     this.loadMap();
-    //this.startNavigating();
+    console.log("HERE"+JSON.stringify(this.binData));
+    this.setmarkers();
   }
+
+
+  async listBinData()
+  {
+    const ListEvents = `query ListEvents {
+      listBinData{
+        items{
+          Bin_id
+          Area_id
+          Gas_Sensor
+          Bin_full_percentage
+          Bin_status
+          Lattitude
+          Longitude
+          Non_Renew_Bin_full_percentage
+          Ren_Bin_full_percentage
+          mail_sent
+          time_stamp
+          }
+        }
+      }`;
+  let y=await API.graphql(graphqlOperation(ListEvents));
+  console.log(JSON.stringify(y));
+  return await JSON.parse(JSON.stringify(y)).data.listBinData.items;
+  }
+
+  async getBinData(binid)
+  {
+    const getEvents = `query GetEvent($Bin_id: String! ) {
+      getBinData(Bin_id: $Bin_id){
+          Bin_id
+          Area_id
+          Gas_Sensor
+          Bin_full_percentage
+          Bin_status
+          Lattitude
+          Longitude
+          Non_Renew_Bin_full_percentage
+          Ren_Bin_full_percentage
+          mail_sent
+          time_stamp
+          collection_status
+        }
+      }`;
+      
+ const variables={Bin_id: binid};
+  let y=await API.graphql(graphqlOperation(getEvents,variables));
+  console.log("GET    "+JSON.stringify(y));
+  return await JSON.parse(JSON.stringify(y)).data.getBinData;
+  }
+
+  loadMap(){
+    this.geolocation.getCurrentPosition().then((position) => {
+      //getting the Latitude and Longitude inside latLng variable
+      let latLng = new google.maps.LatLng(position.coords.latitude,  position.coords.longitude);
+      let mapOptions = {
+        center: latLng, // Centering my Map
+        zoom: 16,
+        styles: [ 
+          {
+            "featureType": "administrative",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.man_made",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "road.local",
+            "elementType": "labels",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          }
+        ],
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      }
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      while(!this.map)
+      {console.log("mapnot")};
+
+    }, (err) => {
+      console.log(err);
+    });
+
+      this.currentposition();
+  }
+
+
+  currentposition()
+  {
+    var marker2;
+    var cityCircle;
+    var image = {
+      url: "https://lh4.googleusercontent.com/proxy/KS777vbYNFIAZ4_uMI5Nt4q01wAI6wvsAtsO8OxrFPWVRNer8M9HBkb1Mk33_g182OcYoPn1JnXJia1nkXboNldfC5RH3Qfz5vfpi3lrAgjWTxQexJkc47x1n5BmCwlj3RwVHMzhgWIXTKH4SKrDPZsY2q9U5SeGGnwpysoM0t3JMF2B-wilfBEZHsWTqSv6UInZ6h85HUhKDmnAFG5KzVL8M9VZqaiXgXe3LvwdMCoFwmrZl-gIgRtJ41lg1w=w5000-h5000",
+      scaledSize: new google.maps.Size(20, 20)
+    };
+    this.geolocation.watchPosition().subscribe(data => {
+      setTimeout(() => {
+        if(marker2)
+          {marker2.setMap(null);}
+        marker2 = new google.maps.Marker({
+          position: new google.maps.LatLng(data.coords.latitude, data.coords.longitude),
+          icon: image,
+          clickable: false
+          });
+        marker2.setMap(this.map);
+        if(this.latitude==0 && this.longitude==0)
+        {
+          console.log("no position");
+          this.map.setCenter(new google.maps.LatLng(data.coords.latitude, data.coords.longitude));
+
+        }
+        if(cityCircle)
+        {
+          cityCircle.setMap(null);
+        }
+        cityCircle = new google.maps.Circle({
+          strokeColor: '#c0edfd',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#c0edfd',
+          fillOpacity: 0.35,
+          clickable : false,
+          map: this.map,
+          center: {lat: data.coords.latitude, lng: data.coords.longitude},
+          radius: 5
+        });
+      }, 0);
+    });
+  }
+ addmarkers()
+ {
+  var iconBase = 'https://s3.amazonaws.com/techbinapp-hosting-mobilehub-1928256020/icons/';
+  var icons = {
+   1: {
+     icon: iconBase + 'bin1.png'
+   },
+   2: {
+     icon: iconBase + 'bin2.png'
+   },
+   3: {
+     icon: iconBase + 'bin2.png'
+   },
+   4: {
+     icon: iconBase + 'bin3.png'
+   },
+   5: {
+    icon: iconBase + 'bin3.png'
+  },
+  6: {
+    icon: iconBase + 'bin4.png'
+  },
+  7: {
+    icon: iconBase + 'bin4.png'
+  },
+  8: {
+    icon: iconBase + 'bin5.png'
+  },
+  9: {
+    icon: iconBase + 'bin5.png'
+  },
+  10: {
+    icon: iconBase + 'bin6.png'
+  }
+ };
+   for(let item of this.binData)
+       {
+         //console.log("item add  "+JSON.stringify(item));
+          
+         console.log("markersetting");
+
+
+         var iconId=Math.ceil(item.Bin_full_percentage/10).toString();
+         var image = {
+           url: icons[iconId].icon,
+           scaledSize: new google.maps.Size(60, 50),
+         };
+
+         
+         var marker = new google.maps.Marker({
+           position: new google.maps.LatLng(item.Lattitude,item.Longitude),
+           icon: image,
+           });
+         var pointer={
+           "marker": marker,
+           "item": item
+         };
+         this.markers.push(pointer);
+         console.log("markerset");
+       }
+ }
+
+ setmarkers()
+ {
+   var i=0;
+  API.get('User_TableCRUD','/User_Table',{})
+    .then(response => {
+      for(let pointer of this.markers)
+      {
+        if(pointer.item.Area_id!=response[0].Area_id)
+              {continue;}
+        i++;
+        if(this.map){
+          pointer.marker.setMap(this.map);
+        }
+        else{
+            setTimeout(()=>{
+              pointer.marker.setMap(this.map);
+            },2000);
+        }
+        this.latitude+=pointer.item.Lattitude;
+        this.longitude+=pointer.item.Longitude;
+       console.log(this.latitude+"  "+this.longitude);
+     this.addInfoWindow(pointer.marker,pointer.item);
+      }
+      this.latitude/=i;
+    this.longitude/=i;
+    if(this.map){
+      this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+      setTimeout(()=>{
+        this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+      },2000);
+    }
+    else{
+      setTimeout(()=>{
+        this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+      },4000);
+    }
+    })
+    .catch(error => { console.log(error);
+    });
+    
+   
+ }
+ 
+  
+  addInfoWindow(marker, item){
+    var setinterval;
+     google.maps.event.addListener(marker, 'click', async () => {
+      item= await this.getBinData(item.Bin_id);
+      //console.log("aaa"+JSON.stringify(item))
+    var disabled,disabled1;
+    
+    if(item.collection_status=="GoingToCollect")
+            {
+              disabled="disabled";
+              disabled1="";
+            }
+            else{
+              disabled1="disabled";
+              disabled ="";
+            }
+    let content = '<h4>Bin Details</h4>'+'<div id="Bin_id">'+'Bin Id : '+ item.Bin_id+'</div>'
+             + '<div id="Bin_full_percentage">'+'Bin Full percentage : '+ item.Bin_full_percentage+'</div>'
+            + '<div id="Ren_Bin_full_percentage">'+'Renewable Bin Full percentage : '+ item.Ren_Bin_full_percentage+'</div>'
+            + '<div id="Non_Renew_Bin_full_percentage">'+'Non Renewable Bin Full percentage : '+ item.Non_Renew_Bin_full_percentage+'</div>'
+            + '<div id="Gas_Sensor">'+'Gas Sensor : '+ item.Gas_Sensor+'</div>'
+            + '<button ion-button type="button" id="GoC" block color="primary"'+ disabled+'>Going to Collect</button>'
+            + '<button ion-button type="button" id="CC" block color="primary"'+disabled1+'>Collected</button>' ;
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+      });
+      //realtime change of bin Data
+    google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+
+      document.getElementById('GoC').addEventListener('click', () => {
+        console.log("GoC");
+       this.putBinData(item.Bin_id, "GoingToCollect");
+      });
+
+      document.getElementById('CC').addEventListener('click', async () => {
+       item= await this.getBinData("AmbujaNeotia");
+       if(item.Bin_full_percentage < 5)
+       {
+        console.log("GoC");
+        this.putBinData(item.Bin_id, "Collected");
+       }
+       else{
+        let loading = this.loadingCtrl.create({
+          spinner: 'hide',
+          content: "Please First Collect the garbge.<br>Then click this button",
+          enableBackdropDismiss: false,
+          //showBackdrop:false
+        });
+        loading.present();
+        setTimeout(() => {  loading.dismiss();}, 5000);
+       }
+      });
+      setinterval=setInterval(async ()=>{
+      await this.getBinData(item.Bin_id).then((response)=>{
+        if(response.collection_status=="GoingToCollect")
+            {
+              (<HTMLInputElement>document.getElementById('GoC')).disabled=true ;
+              (<HTMLInputElement>document.getElementById('CC')).disabled=false ;
+              //console.log("lll"+JSON.stringify(c));
+              
+            }
+            else{
+              (<HTMLInputElement>document.getElementById('CC')).disabled=true ;
+              (<HTMLInputElement>document.getElementById('GoC')).disabled=false ;
+            }
+        document.getElementById('Bin_id').innerHTML='Bin Id : '+response.Bin_id.toString();
+        document.getElementById('Bin_full_percentage').innerHTML='Bin Full percentage : '+response.Bin_full_percentage.toString();
+        document.getElementById('Ren_Bin_full_percentage').innerHTML='Renewable Bin Full percentage : '+response.Ren_Bin_full_percentage.toString();
+        document.getElementById('Non_Renew_Bin_full_percentage').innerHTML='Non Renewable Bin Full percentage : '+response.Non_Renew_Bin_full_percentage.toString();
+        document.getElementById('Gas_Sensor').innerHTML='Gas Sensor : '+response.Gas_Sensor.toString();
+        // document.getElementById('GoingToCollect').innerHTML='<button ion-button type="button" id="GoC" block color="primary"'+ disabled+'>Going to Collect</button>';
+        // document.getElementById('Collected').innerHTML='<button ion-button type="button" id="CC" block color="primary"'+disabled1+'>Collected</button>';
+      });
+    },2000);
+    google.maps.event.addListenerOnce(infoWindow, 'closeclick', () => {
+      console.log("close");
+      clearInterval(setinterval);
+    });
+
+      
+    });
+      infoWindow.close();
+      infoWindow.open(this.map, marker);
+
+    });
+    
+
+  }
+
+  async putBinData(binid,collection_status){
+    var putdata=`mutation a($Bin_id: String!,$Status: String! ){
+      updateBinData(input : {
+        Bin_id: $Bin_id
+        collection_status: $Status
+      }){
+        collection_status
+      }
+    }`;
+    const variables={Bin_id: binid,Status:collection_status};
+    console.log(JSON.stringify(await API.graphql(graphqlOperation(putdata,variables))));
+  }
+
   presentToast(data) {
     let toast = this.toastCtrl.create({
       message: data,
-      duration: 900000,
+      duration: 9000,
       position: 'top',
       closeButtonText:'ok'
     });
@@ -91,267 +461,7 @@ export class TasksPage {
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
-  
     toast.present();
   }
-  
-  refreshTasks() {
-    const params = {
-      'TableName': this.taskTable,
-       'KeyConditionExpression': "#userId = :userId",
-      'ExpressionAttributeNames': { '#userId': 'Name' },
-       'ExpressionAttributeValues': { ':userId': this.username },
-       'ScanIndexForward': false
-    };
-    this.db.getDocumentClient()
-      .then(client => (client as DocumentClient).scan(params).promise())
-      .then(data => { this.items = data.Items; })
-      .catch(err => logger.debug('error in refresh tasks', err))
-      .then(() => { this.refresher && this.refresher.complete() });
-  }
-  getData(i) {
-   
-    const params = {
-      'TableName': this.binTable,
-    //   'KeyConditionExpression': "#userId = :userId",
-    // 'ExpressionAttributeNames': { '#userId': 'Bin_id' },
-    // 'ExpressionAttributeValues': { ':userId': 'AmbujaNeotia' }
-        
-      };
-    
-    this.db.getDocumentClient()
-      .then(client => (client as DocumentClient).scan(params).promise())
-      .then(data => { ;
-      })
-      .catch(err => this.presentToast(err));
-      // this.presentToast(this.items);
-      // this.sitems=this.items;
-      // this.jitems=this.sitems;
-}
-  setmarkers()
-  {
-    this.http.put('https://x2pmcb3wx3.execute-api.us-east-1.amazonaws.com/Development/User_Data/UserTable', {
-       id: 12,
-      message: 'test'
-    }//, { Authorization: 'OAuth2: token' }
-);
 
-
-    var iconBase = 'https://s3.amazonaws.com/techbinapp-hosting-mobilehub-1928256020/icons/';
-     var icons = {
-      empty: {
-        icon: iconBase + 'bin1.png'
-      },
-      active: {
-        icon: iconBase + 'bin3.png'
-      },
-      full: {
-        icon: iconBase + 'bin6.png'
-      },
-      Halt: {
-        icon: iconBase + 'redbinicon.png'
-      }
-    };
-    var areaid;
-    const param1 = {
-      'TableName': this.taskTable,
-      'KeyConditionExpression': "#userId = :userId",
-      'ExpressionAttributeNames': { '#userId': 'userId' },
-      'ExpressionAttributeValues': { ':userId': this.userId },
-      'ScanIndexForward': false
-    };
-    this.db.getDocumentClient()
-      .then(client => (client as DocumentClient).query(param1).promise())
-      .then(data => { //this.sitems = JSON.stringify(data.Items);
-      areaid=data.Items[0].Area_id })
-      .catch(err => {logger.debug('error in refresh tasks', err);
-    //this.presentToast(err)
-    ;})
-      .then(() => { this.refresher && this.refresher.complete() });
-      const params = {
-        'TableName': this.binTable,   
-        };
-      var i=0;
-      this.latitude=0;
-      this.longitude=0;
-      this.db.getDocumentClient()
-      .then(client => (client as DocumentClient).scan(params).promise())
-      .then(data => { //this.sitems= JSON.stringify(data);
-          for(let item of data.Items)
-          {
-            this.latitude+=item.Lattitude;
-            this.longitude+=item.Longitude;
-            // if(item.Bin_status=='Halt'&& item.Area_code!=areaid)
-            //  {continue;}
-        var image = {
-          url: icons[item.Bin_status].icon,
-          scaledSize: new google.maps.Size(50, 50),
-        };
-      var marker = new google.maps.Marker({
-        //animation: google.maps.Animation.BOUNCE,
-       position: new google.maps.LatLng(item.Lattitude,item.Longitude),
-        icon: image,
-        map: this.map});
-        var disabled;
-        var disabled1;
-        if(item.Bin_status=="Halt")
-        {
-          disabled="disabled";
-          disabled1="";
-        }
-        else{
-          disabled1="disabled";
-          disabled ="";
-        }
-        let content = 'Bin Id : '+ item.Bin_id;
-        content += '<br>Bin Full percentage : '+ item.Bin_full_percentage;
-        content += '<br>Renewable Bin Full percentage : '+ item.Ren_Bin_full_percentage;
-        content += '<br>Non Renewable Bin Full percentage : '+ item.Non_Renew_Bin_full_percentage;
-        content += '<br>Gas Sensor : '+ item.Gas_Sensor;
-        content = content + '<br><button ion-button type="button" id="GoC" block color="primary"'+ disabled+'>Going to Collect</button>' ; 
-        content = content + '<br><button ion-button type="button" id="CC" block color="primary"'+disabled1+'>Collected</button>' ; 
-        
-
-        this.addInfoWindow(marker, content,item.Bin_id,item.Bin_status);
-      }
-        this.latitude=this.latitude/data.Count;
-        this.longitude=this.longitude/data.Count;
-      })
-      .catch(err => this.presentToast(err));
-      //this.presentToast("User: "+JSON.stringify(this.userId));
-        i++;
-      
-  }
-  // putData(Bin_id)
-  // {
-  //   //this.sitems="Item Added";
-  //   const params = {
-  //     'TableName': this.binTable,
-  //     'Key':{
-  //       'Bin_id': Bin_id
-  //     },
-  //     UpdateExpression: "set collection_status = :n",
-  //     ExpressionAttributeValues:{
-  //         ":n": 'Halt',
-  //     },
-  //   };
-  //   this.db.getDocumentClient()
-  //     .then(client => (client as DocumentClient).update(params).promise())
-  //     .then(data => //this.sitems=data
-  //     )
-  //     .catch(err => this.presentToast(err));
-  // }
-  // putData2(Bin_id,Bin_status)
-  // {
-  //   //this.sitems="Item Added";
-  //   const params = {
-  //     'TableName': this.binTable,
-  //     'Key':{
-  //       'Bin_id': Bin_id
-  //     },
-  //     UpdateExpression: "set Bin_status = :n",
-  //     ExpressionAttributeValues:{
-  //         ":n": 'collected',
-  //     },
-  //   };
-  //   if(Bin_status=="empty")
-  //   {
-  //   this.db.getDocumentClient()
-  //     .then(client => (client as DocumentClient).update(params).promise())
-  //     .then(data => //this.sitems=data
-  //     )
-  //     .catch(err => this.presentToast(err));
-  //   }
-  // }
-  
-  loadMap(){
-    
- 
-    this.geolocation.getCurrentPosition().then((position) => {
- 
-      let latLng = new google.maps.LatLng(22.585331,  88.490260);
- 
-      let mapOptions = {
-        center: latLng,
-        zoom: 17,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-      }
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      this.setmarkers();
- 
-    }, (err) => {
-      console.log(err);
-    });
- 
-  
-  }
-  // startNavigating(){
- 
-  //   let directionsService = new google.maps.DirectionsService;
-  //   let directionsDisplay = new google.maps.DirectionsRenderer;
-
-  //   directionsDisplay.setMap(this.map);
-  //   directionsDisplay.setPanel(this.directionsPanel.nativeElement);
-
-  //   directionsService.route({
-  //       origin: {lat: 22.589910, lng:  88.419633},
-  //       destination: {lat: 22.585200, lng: 88.490149},
-  //       travelMode: google.maps.TravelMode['DRIVING']
-  //   }, (res, status) => {
-
-  //       if(status == google.maps.DirectionsStatus.OK){
-  //           directionsDisplay.setDirections(res);
-  //          // this.presentToast(JSON.stringify(res));
-  //       } else {
-  //        // this.presentToast(status);
-  //           console.warn(status);
-  //       }
-
-  //   });
-  // }
-  addMarker(){
- 
-    var image = {
-      url: 'http://www.pngpix.com/wp-content/uploads/2016/10/PNGPIX-COM-Dustbin-PNG-Image.png', // image is 512 x 512
-      scaledSize: new google.maps.Size(40, 40),
-    };
-    let marker = new google.maps.Marker({
-      map: this.map,
-      animation: google.maps.Animation.DROP,
-     // icon: image,
-      position: this.map.getCenter(),
-     // icon :'http://www.pngpix.com/wp-content/uploads/2016/10/PNGPIX-COM-Dustbin-PNG-Image.png'
-    });
-   
-    let content = "<h4>Information!</h4>";         
-   
-    //this.addInfoWindow(marker, content);
-   
-  }
-  addInfoWindow(marker, content,Bin_id,Bin_status){
-    let infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
-    google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
-      document.getElementById('GoC').addEventListener('click', () => {
-        //alert('Clicked');
-       // this.presentToast("Hello");
-      // this.putData(Bin_id);
-      });
-      document.getElementById('CC').addEventListener('click', () => {
-        //alert('Clicked');
-       // this.presentToast("Hello");
-      // this.putData2(Bin_id,Bin_status);
-      });
-    });
-   
-    google.maps.event.addListener(marker, 'click', () => {
-      // setMapOnAll(null);
-      infoWindow.close();
-      this.setmarkers();
-      infoWindow.open(this.map, marker);
-    });
-    setTimeout(function () { infoWindow.close(); }, 5000);
-
-  }
 }

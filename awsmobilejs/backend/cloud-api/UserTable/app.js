@@ -71,7 +71,7 @@ app.get('/User_Table', function(req, res) {
       res.json({error: 'Wrong column type ' + err});
     }
   }
-
+  console.log(JSON.stringify(condition));
   let queryParams = {
     TableName: tableName,
     KeyConditions: condition
