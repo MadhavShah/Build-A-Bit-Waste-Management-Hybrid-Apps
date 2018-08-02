@@ -1,0 +1,72 @@
+{
+    "dataSources": [
+        {
+            "name": "BinData",
+            "description": "Data source created by the console.",
+            "type": "AMAZON_DYNAMODB",
+            "serviceRoleArn": "{managed-by-awsmobile-cli}",
+            "dynamodbConfig": {
+                "tableName": "Bin_Data",
+                "awsRegion": "us-east-1",
+                "useCallerCredentials": false
+            }
+        },
+        {
+            "name": "Rewards",
+            "description": "Data source created by the console.",
+            "type": "AMAZON_DYNAMODB",
+            "serviceRoleArn": "{managed-by-awsmobile-cli}",
+            "dynamodbConfig": {
+                "tableName": "Rewards_Table",
+                "awsRegion": "us-east-1",
+                "useCallerCredentials": false
+            }
+        }
+    ],
+    "tables": [
+        {
+            "AttributeDefinitions": [
+                {
+                    "AttributeName": "Bin_id",
+                    "AttributeType": "S"
+                }
+            ],
+            "TableName": "Bin_Data",
+            "KeySchema": [
+                {
+                    "AttributeName": "Bin_id",
+                    "KeyType": "HASH"
+                }
+            ],
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "StreamSpecification": {
+                "StreamEnabled": true,
+                "StreamViewType": "NEW_AND_OLD_IMAGES"
+            },
+            "Region": "us-east-1"
+        },
+        {
+            "AttributeDefinitions": [
+                {
+                    "AttributeName": "reward_id",
+                    "AttributeType": "S"
+                }
+            ],
+            "TableName": "Rewards_Table",
+            "KeySchema": [
+                {
+                    "AttributeName": "reward_id",
+                    "KeyType": "HASH"
+                }
+            ],
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "Region": "us-east-1"
+        }
+    ]
+}

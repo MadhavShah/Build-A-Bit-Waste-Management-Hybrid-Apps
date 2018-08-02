@@ -1,0 +1,50 @@
+{
+    "dataSources": [
+        {
+            "name": "Bin_Data",
+            "description": "Data source created by the console.",
+            "type": "AMAZON_DYNAMODB",
+            "serviceRoleArn": "{managed-by-awsmobile-cli}",
+            "dynamodbConfig": {
+                "tableName": "Bin_Data",
+                "awsRegion": "us-east-1",
+                "useCallerCredentials": false
+            }
+        },
+        {
+            "name": "lambda",
+            "description": "Data source created by the console.",
+            "type": "AWS_LAMBDA",
+            "serviceRoleArn": "{managed-by-awsmobile-cli}",
+            "lambdaConfig": {
+                "lambdaFunctionArn": "arn:aws:lambda:us-east-1:070327079168:function:binToDynamodb"
+            }
+        }
+    ],
+    "tables": [
+        {
+            "AttributeDefinitions": [
+                {
+                    "AttributeName": "Bin_id",
+                    "AttributeType": "S"
+                }
+            ],
+            "TableName": "Bin_Data",
+            "KeySchema": [
+                {
+                    "AttributeName": "Bin_id",
+                    "KeyType": "HASH"
+                }
+            ],
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "StreamSpecification": {
+                "StreamEnabled": true,
+                "StreamViewType": "NEW_AND_OLD_IMAGES"
+            },
+            "Region": "us-east-1"
+        }
+    ]
+}

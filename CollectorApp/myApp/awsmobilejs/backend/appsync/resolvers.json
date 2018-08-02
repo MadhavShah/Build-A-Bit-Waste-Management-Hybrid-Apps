@@ -1,0 +1,37 @@
+[
+    {
+        "typeName": "Mutation",
+        "fieldName": "createBinData",
+        "dataSourceName": "Bin_Data",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createBinData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createBinData.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "deleteBinData",
+        "dataSourceName": "Bin_Data",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteBinData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteBinData.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "updateBinData",
+        "dataSourceName": "Bin_Data",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.updateBinData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.updateBinData.response"
+    },
+    {
+        "typeName": "Query",
+        "fieldName": "getBinData",
+        "dataSourceName": "Bin_Data",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.getBinData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.getBinData.response"
+    },
+    {
+        "typeName": "Query",
+        "fieldName": "listBinData",
+        "dataSourceName": "Bin_Data",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.listBinData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.listBinData.response"
+    }
+]

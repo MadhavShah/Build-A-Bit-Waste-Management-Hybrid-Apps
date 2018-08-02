@@ -1,0 +1,129 @@
+type BinData
+{
+Bin_id: String!
+Area_id: String!
+Bin_full_percentage: Float!
+Bin_status: String!
+Lattitude: Float!
+Longitude: Float!
+Non_Renew_Bin_full_percentage: Float!
+Ren_Bin_full_percentage: Float!
+mail_sent: Boolean!
+time_stamp: String!
+Gas_Sensor: Int!
+collection_status: String!
+Status: String!
+}
+
+type BinDataConnection
+{
+items: [BinData]
+nextToken: String
+}
+
+input CreateBinDataInput
+{
+Bin_id: String!
+Area_id: String!
+Bin_full_percentage: Float!
+Bin_status: String!
+Lattitude: Float!
+Longitude: Float!
+Non_Renew_Bin_full_percentage: Float!
+Ren_Bin_full_percentage: Float!
+mail_sent: Boolean!
+time_stamp: String!
+Gas_Sensor: Int!
+collection_status: String!
+Status: String!}
+
+input CreateRewardsTableInput
+{
+reward_id: String!}
+
+input DeleteBinDataInput
+{
+Bin_id: String!}
+
+input DeleteRewardsTableInput
+{
+reward_id: String!}
+
+type Mutation
+{
+createBinData(input: CreateBinDataInput! ): BinData
+updateBinData(input: UpdateBinDataInput! ): BinData
+deleteBinData(input: DeleteBinDataInput! ): BinData
+createRewardsTable(input: CreateRewardsTableInput! ): RewardsTable
+updateRewardsTable(input: UpdateRewardsTableInput! ): RewardsTable
+deleteRewardsTable(input: DeleteRewardsTableInput! ): RewardsTable
+}
+
+type Query
+{
+getBinData(Bin_id: String! ): BinData
+listBinData(first: Int,after: String ): BinDataConnection
+getRewardsTable(reward_id: String! ): RewardsTable
+listRewardsTables(first: Int,after: String ): RewardsTableConnection
+}
+
+type RewardsTable
+{
+reward_id: String!
+Stock: Int!
+code: String!
+cost: Int!
+expiry: String!
+logo: String!
+name: String!
+vendor: String!
+}
+
+type RewardsTableConnection
+{
+items: [RewardsTable]
+nextToken: String
+}
+
+type Subscription
+{
+onCreateBinData(Bin_id: String,Area_id: String,Bin_full_percentage: Float,Bin_status: String,Lattitude: Float ): BinData
+@aws_subscribe(mutations: ["createBinData"])
+onUpdateBinData(Bin_id: String,Area_id: String,Bin_full_percentage: Float,Bin_status: String,Lattitude: Float ): BinData
+@aws_subscribe(mutations: ["updateBinData"])
+onDeleteBinData(Bin_id: String,Area_id: String,Bin_full_percentage: Float,Bin_status: String,Lattitude: Float ): BinData
+@aws_subscribe(mutations: ["deleteBinData"])
+onCreateRewardsTable(reward_id: String ): RewardsTable
+@aws_subscribe(mutations: ["createRewardsTable"])
+onUpdateRewardsTable(reward_id: String ): RewardsTable
+@aws_subscribe(mutations: ["updateRewardsTable"])
+onDeleteRewardsTable(reward_id: String ): RewardsTable
+@aws_subscribe(mutations: ["deleteRewardsTable"])
+}
+
+input UpdateBinDataInput
+{
+Bin_id: String!
+Area_id: String
+Bin_full_percentage: Float
+Bin_status: String
+Lattitude: Float
+Longitude: Float
+Non_Renew_Bin_full_percentage: Float
+Ren_Bin_full_percentage: Float
+mail_sent: Boolean
+time_stamp: String
+Gas_Sensor: Int
+collection_status: String
+Status: String}
+
+input UpdateRewardsTableInput
+{
+reward_id: String!}
+
+schema 
+{
+query: Query
+mutation: Mutation
+subscription: Subscription
+}

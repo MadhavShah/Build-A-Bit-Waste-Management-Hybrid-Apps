@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Home 
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="loadMap()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <!-- <div ><ion-spinner name="bubbles"></ion-spinner></div> -->
+    <div #map id="map"></div>
+</ion-content>
+

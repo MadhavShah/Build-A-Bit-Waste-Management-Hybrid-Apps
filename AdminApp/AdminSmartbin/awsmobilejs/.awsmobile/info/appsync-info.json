@@ -1,0 +1,13 @@
+{
+    "apiId": "s5axupp5hfgcvf2e7zirn72dnq",
+    "region": "us-east-1",
+    "name": "AdminSmartBin",
+    "graphqlEndpoint": "https://w23goy5wgrcxxm6i3255wyzt5u.appsync-api.us-east-1.amazonaws.com/graphql",
+    "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+    "creationTime": "2018-07-02-13-33-40",
+    "lastUpdateTime": "2018-07-02-13-33-40",
+    "lastSyncTime": "2018-07-06-15-50-00",
+    "lastPushSuccessful": true,
+    "AppSyncConsoleUrl": "https://console.aws.amazon.com/appsync/home?region=us-east-1#/s5axupp5hfgcvf2e7zirn72dnq/v1/home",
+    "lastSyncToDevTime": "2018-07-06-15-57-09"
+}
