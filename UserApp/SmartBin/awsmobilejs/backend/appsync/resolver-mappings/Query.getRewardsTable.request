@@ -1,7 +1,0 @@
-{
-  "version": "2017-02-28",
-  "operation": "GetItem",
-  "key": {
-    "reward_id": $util.dynamodb.toDynamoDBJson($ctx.args.reward_id),
-  },
-}
