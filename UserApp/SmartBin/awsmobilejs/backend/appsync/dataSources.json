@@ -1,0 +1,129 @@
+{
+    "dataSources": [
+        {
+            "name": "AppSyncCommentTable",
+            "description": null,
+            "type": "AMAZON_DYNAMODB",
+            "serviceRoleArn": "{managed-by-awsmobile-cli}",
+            "dynamodbConfig": {
+                "tableName": "AppSyncCommentTable-szWGFSVo",
+                "awsRegion": "us-east-1",
+                "useCallerCredentials": false
+            }
+        },
+        {
+            "name": "AppSyncEventTable",
+            "description": null,
+            "type": "AMAZON_DYNAMODB",
+            "serviceRoleArn": "{managed-by-awsmobile-cli}",
+            "dynamodbConfig": {
+                "tableName": "AppSyncEventTable-szWGFSVo",
+                "awsRegion": "us-east-1",
+                "useCallerCredentials": false
+            }
+        },
+        {
+            "name": "dd",
+            "description": "Data source created by the console.",
+            "type": "AMAZON_DYNAMODB",
+            "serviceRoleArn": "{managed-by-awsmobile-cli}",
+            "dynamodbConfig": {
+                "tableName": "Garbage_Data",
+                "awsRegion": "us-east-1",
+                "useCallerCredentials": false
+            }
+        }
+    ],
+    "tables": [
+        {
+            "AttributeDefinitions": [
+                {
+                    "AttributeName": "commentId",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "createdAt",
+                    "AttributeType": "S"
+                },
+                {
+                    "AttributeName": "eventId",
+                    "AttributeType": "S"
+                }
+            ],
+            "TableName": "AppSyncCommentTable-szWGFSVo",
+            "KeySchema": [
+                {
+                    "AttributeName": "eventId",
+                    "KeyType": "HASH"
+                },
+                {
+                    "AttributeName": "commentId",
+                    "KeyType": "RANGE"
+                }
+            ],
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "LocalSecondaryIndexes": [
+                {
+                    "IndexName": "LSI-AppSyncCommentTable-by-eventId-createdAt",
+                    "KeySchema": [
+                        {
+                            "AttributeName": "eventId",
+                            "KeyType": "HASH"
+                        },
+                        {
+                            "AttributeName": "createdAt",
+                            "KeyType": "RANGE"
+                        }
+                    ],
+                    "Projection": {
+                        "ProjectionType": "ALL"
+                    }
+                }
+            ],
+            "Region": "us-east-1"
+        },
+        {
+            "AttributeDefinitions": [
+                {
+                    "AttributeName": "id",
+                    "AttributeType": "S"
+                }
+            ],
+            "TableName": "AppSyncEventTable-szWGFSVo",
+            "KeySchema": [
+                {
+                    "AttributeName": "id",
+                    "KeyType": "HASH"
+                }
+            ],
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "Region": "us-east-1"
+        },
+        {
+            "AttributeDefinitions": [
+                {
+                    "AttributeName": "request_id",
+                    "AttributeType": "S"
+                }
+            ],
+            "TableName": "Garbage_Data",
+            "KeySchema": [
+                {
+                    "AttributeName": "request_id",
+                    "KeyType": "HASH"
+                }
+            ],
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 5,
+                "WriteCapacityUnits": 5
+            },
+            "Region": "us-east-1"
+        }
+    ]
+}

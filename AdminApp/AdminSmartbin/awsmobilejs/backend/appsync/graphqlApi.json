@@ -1,0 +1,4 @@
+{
+    "name": "AdminApphackathon",
+    "authenticationType": "AWS_IAM"
+}

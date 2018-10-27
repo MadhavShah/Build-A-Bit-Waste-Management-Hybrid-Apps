@@ -1,0 +1,79 @@
+[
+    {
+        "typeName": "Event",
+        "fieldName": "comments",
+        "dataSourceName": "AppSyncCommentTable",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Event.comments.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Event.comments.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "commentOnEvent",
+        "dataSourceName": "AppSyncCommentTable",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.commentOnEvent.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.commentOnEvent.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "createEvent",
+        "dataSourceName": "AppSyncEventTable",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createEvent.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createEvent.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "createGarbageData",
+        "dataSourceName": "dd",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createGarbageData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.createGarbageData.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "deleteEvent",
+        "dataSourceName": "AppSyncEventTable",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteEvent.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteEvent.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "deleteGarbageData",
+        "dataSourceName": "dd",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteGarbageData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.deleteGarbageData.response"
+    },
+    {
+        "typeName": "Mutation",
+        "fieldName": "updateGarbageData",
+        "dataSourceName": "dd",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.updateGarbageData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Mutation.updateGarbageData.response"
+    },
+    {
+        "typeName": "Query",
+        "fieldName": "getEvent",
+        "dataSourceName": "AppSyncEventTable",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.getEvent.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.getEvent.response"
+    },
+    {
+        "typeName": "Query",
+        "fieldName": "getGarbageData",
+        "dataSourceName": "dd",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.getGarbageData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.getGarbageData.response"
+    },
+    {
+        "typeName": "Query",
+        "fieldName": "listEvents",
+        "dataSourceName": "AppSyncEventTable",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.listEvents.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.listEvents.response"
+    },
+    {
+        "typeName": "Query",
+        "fieldName": "listGarbageData",
+        "dataSourceName": "dd",
+        "requestMappingTemplate": "{managed-by-awsmobile-cli}:Query.listGarbageData.request",
+        "responseMappingTemplate": "{managed-by-awsmobile-cli}:Query.listGarbageData.response"
+    }
+]

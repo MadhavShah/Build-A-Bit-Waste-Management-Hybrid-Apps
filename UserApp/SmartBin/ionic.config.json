@@ -1,0 +1,7 @@
+{
+  "name": "SmartBin",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

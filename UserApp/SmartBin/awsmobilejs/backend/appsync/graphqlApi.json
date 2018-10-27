@@ -1,0 +1,10 @@
+{
+    "name": "UserApphackathon",
+    "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+    "userPoolConfig": {
+        "userPoolId": "us-east-1_uOHAIcTvN",
+        "awsRegion": "us-east-1",
+        "defaultAction": "ALLOW",
+        "appIdClientRegex": null
+    }
+}
