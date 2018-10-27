@@ -1,0 +1,6 @@
+{
+	"SourceDir": "src",
+	"DistributionDir": "www",
+	"BuildCommand": "npm.cmd run-script build",
+	"StartCommand": "ionic serve"
+}

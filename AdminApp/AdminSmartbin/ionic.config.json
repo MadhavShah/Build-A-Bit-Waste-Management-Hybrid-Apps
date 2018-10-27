@@ -1,0 +1,7 @@
+{
+  "name": "AdminSmartbin",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

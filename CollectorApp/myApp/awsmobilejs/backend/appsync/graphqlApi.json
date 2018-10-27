@@ -1,0 +1,4 @@
+{
+    "name": "collectorApphackathon",
+    "authenticationType": "AWS_IAM"
+}
